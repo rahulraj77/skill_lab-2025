@@ -27,3 +27,8 @@ The receiver pin is connected to transmitter pin, hence no **instantiation** of 
 The output of board is echoed through the command **``` sudo picocom -b 9600 /dev/ttyUSB0 --echo ```**
 
 ![UART Loopback Output](https://github.com/user-attachments/assets/f88d1d39-1700-4343-ae53-2404b0cdc7a8)
+
+
+## Integration of Ultrasonic Sensor
+
+The real-time data is been tracked from the ultrasonic sensor and is displayed in the terminal using the command 
