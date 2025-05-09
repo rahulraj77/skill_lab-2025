@@ -12,7 +12,7 @@ Here, the LED changes from RED to Green to Blue and back again to RED continuosl
 
 ### Turning on Green LED
 
-This performs turning on Green LED for the FPGA Mini Board
+This performs turns on Green LED for the FPGA Mini Board
 
 
 ![Green_LED_Out](https://github.com/user-attachments/assets/3b0f27c9-aec6-4ed9-9017-9638d3ad36c3)
@@ -48,8 +48,3 @@ The data is received from Ultrasonic sensor to FPGA using UART Protocol
 
 ![Ultrasonic sensor integration](https://github.com/user-attachments/assets/0efb9588-1f41-4f66-95ae-08263ee9b4a9)
 
-
-
-## Integration of Ultrasonic Sensor
-
-The real-time data is been tracked from the ultrasonic sensor and is displayed in the terminal using the command 
