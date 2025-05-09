@@ -12,8 +12,8 @@ The output can be seen by using the command ``` sudo make terminal ```
 
 ### UART Simulation using Logic Analyzer 
 
-The pin number of `uarttx` is changed from **14** to  **4**
-The pin number of `uartrx` is changed from **15** to  **3**
+The pin number of `uarttx` is changed from **14** to  **4**. <b>
+The pin number of `uartrx` is changed from **15** to  **3**. <b>
 
 ## UART Loopback
 
