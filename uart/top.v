@@ -22,8 +22,22 @@ module top (
     reg clk_9600 = 0;
     reg [31:0] cntr_9600 = 32'b0;
     parameter period_9600 = 625;
+    reg [7:0] data_array [0:3];
+    initial begin
+      data_array[0] = "A";
+      data_array[1] = "H";
+      data_array[2] = "U";
+      data_array[3] = "L";
+    end
+
+    reg [2:0] byte_index = 0;      // Index for data_array (0 to 4)
+    reg senddata = 0;              // Trigger for UART send
+    reg [7:0] txbyte = 8'b0;       // Byte to send
+    reg [15:0] uart_timer = 0;     // Timer to space out transmissions
+    reg sending = 0;               // Indicates if a byte is being sent
+
     
-uart_tx_8n1 DanUART1 (.clk (clk_9600), .txbyte("R"), .senddata(frequency_counter_i[24]), .tx(uarttx));
+uart_tx_8n1 DanUART1 (.clk (clk_9600), .txbyte(txbyte), .senddata(frequency_counter_i[24]), .tx(uarttx));
 
 //----------------------------------------------------------------------------
 //                                                                          --
@@ -47,6 +61,26 @@ uart_tx_8n1 DanUART1 (.clk (clk_9600), .txbyte("R"), .senddata(frequency_counter
             cntr_9600 <= 32'b0;
         end
   end
+
+  always @(posedge clk_9600) begin
+    if (byte_index < 5) begin
+        if (!sending) begin
+            txbyte <= data_array[byte_index];
+            senddata <= 1;
+            sending <= 1;
+            uart_timer <= 0;
+        end else begin
+            senddata <= 0; // Pulse senddata for one cycle only
+            uart_timer <= uart_timer + 1;
+            // Wait for 10 cycles (1 full UART frame)
+            if (uart_timer >= 10) begin
+                sending <= 0;
+                byte_index <= byte_index + 1;
+            end
+        end
+    end
+end
+
 
 //----------------------------------------------------------------------------
 //                                                                          --
